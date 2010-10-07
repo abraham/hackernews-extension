@@ -26,5 +26,7 @@
     "16": "images/hx16.png",
     "48": "images/logo.png",
     "128": "images/logo.png"
-  }
+  },
+  "update_url": "http://github.com/abraham/hackernews-extension/raw/master/updates.xml",
+  "minimum_chrome_version": "7"
 }
