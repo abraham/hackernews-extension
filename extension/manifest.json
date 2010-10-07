@@ -1,0 +1,30 @@
+{
+  "name": "Hacker News",
+  "background_page": "background.html",
+  "content_scripts": [ {
+    "js": [
+      "javascripts/jquery-1.4.2.min.js",
+      "javascripts/jquery.tipsy.js",
+      "javascripts/jquery.tipsy.hovercard.js",
+      "javascripts/content.js"
+    ],
+    "css": ["stylesheets/tipsy.css"],
+    "matches": [ 
+      "http://news.ycombinator.com/*"
+    ]
+  } ],
+  "description": "Add a bunch of sexyness to Hacker News.",
+  "permissions": [
+    "http://api.ihackernews.com/",
+    "http://json.searchyc.com/",
+    "experimental",
+    "tabs"
+  ],
+  "omnibox_keyword": "hn",
+  "version": "1",
+  "icons": {
+    "16": "images/hx16.png",
+    "48": "images/logo.png",
+    "128": "images/logo.png"
+  }
+}

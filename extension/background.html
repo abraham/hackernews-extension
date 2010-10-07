@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <script>
+var currentSearchRequest = null;
+
+chrome.extension.onRequest.addListener(
+  function(request, sender, sendResponse) {
+    var xhr = new XMLHttpRequest()
+    xhr.open("GET", "http://api.ihackernews.com/profile/"+ request.user, true)
+    xhr.send()
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200)  {
+          sendResponse(JSON.parse(xhr.responseText))
+        } else {
+          sendResponse({error: true, response: xhr.responseText})
+        }
+      }
+    }
+  }
+)
+
+chrome.experimental.omnibox.onInputChanged.addListener(
+  function(text, suggest) {
+    if ('' == text) {
+      return;
+    }
+     
+    if (currentSearchRequest != null) {
+      currentSearchRequest.onreadystatechange = null;
+      currentSearchRequest.abort();
+      currentSearchRequest = null;
+    }
+
+    currentSearchRequest = search(
+      text,
+      function(json) {
+        var suggestions = [];
+        for(var index in json) {
+          var result = json[index];
+          var text = (result.title || result.text).substring(0, 75);
+          var extra = 
+            ' ' + 
+            result.points + 
+            (result.points == 1 ? ' point by ' : ' points by ') +
+            result.username;
+          suggestions.push({
+            content: 'id:' + result.id,
+            description: text + extra
+          });
+        };
+        suggest(suggestions);        
+      }
+    );
+  }
+);
+
+function search(query, callback) {
+  var url = "http://json.searchyc.com/" + query;
+  var req = new XMLHttpRequest();
+  req.open("GET", url, true);
+  req.onreadystatechange = function() {
+    if (req.readyState == 4) {
+      callback(JSON.parse(req.responseText));
+    }
+  }
+  req.send(null);
+  return req;
+}
+
+function getHNURL(id) {
+  return 'http://news.ycombinator.com/item?id=' + id;
+}
+
+function getSearchYCURL(query) {
+  return 'http://searchyc.com/' + query;
+}
+
+function navigate(url) {
+  chrome.tabs.getSelected(null, function(tab) {
+    chrome.tabs.update(tab.id, {url: url});
+  });
+}
+
+chrome.experimental.omnibox.onInputEntered.addListener(
+  function(text) {
+    if (text.indexOf('id:') == 0) {
+      var chunks = text.split('id:');
+      navigate(getHNURL(chunks[1]));
+    } else {
+      navigate(getSearchYCURL(text));
+    }
+  }
+);
+
+
+    </script>
+  </head>
+</html>
