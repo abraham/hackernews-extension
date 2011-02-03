@@ -4,27 +4,27 @@
   "content_scripts": [ {
     "js": [
       "javascripts/jquery-1.5.min.js",
+      "javascripts/jquery.tmpl.min.js",
       "javascripts/jquery-ui-1.8.9.custom.min.js",
       "javascripts/content.js"
     ],
     "css": ["stylesheets/smoothness/jquery-ui-1.8.9.custom.css"],
     "matches": [ 
-      "http://news.ycombinator.com/*"
+      "http://news.ycombinator.com/*",
+      "https://news.ycombinator.com/*"
     ]
   } ],
   "description": "Add a bunch of social sexyness to Hacker News.",
   "permissions": [
     "http://api.ihackernews.com/",
-    "http://json.searchyc.com/",
-//    "experimental",
-    "tabs"
+    "http://json.searchyc.com/"
   ],
-  "omnibox_keyword": "hn",
-  "version": "1",
+  "omnibox": { "keyword": "hn" },
+  "version": "2011.2.3",
   "icons": {
-    "16": "images/hx16.png",
-    "48": "images/logo.png",
-    "128": "images/logo.png"
+    "16": "images/ylogo-black.png",
+    "48": "images/ylogo.png",
+    "128": "images/ylogo.png"
   },
   "update_url": "http://github.com/abraham/hackernews-extension/raw/master/updates.xml"
 }
