@@ -3,21 +3,20 @@
   "background_page": "background.html",
   "content_scripts": [ {
     "js": [
-      "javascripts/jquery-1.4.2.min.js",
-      "javascripts/jquery.tipsy.js",
-      "javascripts/jquery.tipsy.hovercard.js",
+      "javascripts/jquery-1.5.min.js",
+      "javascripts/jquery-ui-1.8.9.custom.min.js",
       "javascripts/content.js"
     ],
-    "css": ["stylesheets/tipsy.css"],
+    "css": ["stylesheets/smoothness/jquery-ui-1.8.9.custom.css"],
     "matches": [ 
       "http://news.ycombinator.com/*"
     ]
   } ],
-  "description": "Add a bunch of sexyness to Hacker News.",
+  "description": "Add a bunch of social sexyness to Hacker News.",
   "permissions": [
     "http://api.ihackernews.com/",
     "http://json.searchyc.com/",
-    "experimental",
+//    "experimental",
     "tabs"
   ],
   "omnibox_keyword": "hn",
@@ -27,6 +26,5 @@
     "48": "images/logo.png",
     "128": "images/logo.png"
   },
-  "update_url": "http://github.com/abraham/hackernews-extension/raw/master/updates.xml",
-  "minimum_chrome_version": "7"
+  "update_url": "http://github.com/abraham/hackernews-extension/raw/master/updates.xml"
 }
