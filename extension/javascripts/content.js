@@ -4,7 +4,7 @@ var hoverCard = {
   friends: localStorage.getItem('friends') ? JSON.parse(localStorage.getItem('friends')) : [],
 
   profileTemplate: '<div>\
-    <span>Created ${createdAgo} with ${karma}</span> \
+    <span>Created ${createdAgo} with ${karma} karma</span> \
     <p>{{html about}}</p> \
     <span><u><a href="submitted?id=${username}">submissions</a></u> <u><a href="threads?id=${username}">comments</a></u></span> \
     </div>',
